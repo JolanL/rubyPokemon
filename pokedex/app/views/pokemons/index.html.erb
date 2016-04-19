@@ -1,0 +1,32 @@
+<!-- app/views/pokemons/index.html.erb -->
+
+<h2>
+	Liste des pokemons 
+</h2>	
+
+<%= link_to 'Liste des Pokemons', pokemons_path, class: 'btn btn-default' %>
+
+<%= link_to 'Editer', edit_pokemons_path(@pokemon), class: 'btn btn-default' %>
+
+<% if @pokemons.any? %>
+	<table class="table" style="width: 350px;">
+		<thead>
+			<tr>
+				<th>#</th>
+				<th>Nom</th>
+				<th>Actions</th>
+			</tr>	
+		</thead>
+		<tbody>
+			<% @pokemons.each do |pokemon| %>
+			<tr>
+				<td><%= pokemon.id %></td>
+				<td><%= pokemon.name %></td>
+				<td><%= link_to 'Afficher', pokemon, class: 'btn btn-primary' %></td>
+			</tr>
+			<% end %>
+		</tbody>
+	</table>
+<% else %>
+	<p>Il 'ny a pas encore de Pokemons.</p>
+<% end %>
