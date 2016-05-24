@@ -1,0 +1,28 @@
+<%= form_for(@type) do |f| %>
+  <% if @type.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@type.errors.count, "error") %> à empêcher le modèle d'être créer:</h2>
+
+      <ul>
+      <% @type.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="row">
+    <div class="form-group col-lg-5">
+      <%= f.label :name, 'Nom' %><br>
+      <%= f.text_field :name, class: 'form-group' %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="form-group col-lg-5">
+      <%= f.label :color, 'Couleur' %><br>
+      <%= f.text_field :color, class: 'form-group' %>
+    </div>
+  </div>
+  <div class="actions">
+    <%= f.submit 'Enregistrer', class: 'btn btn-primary' %>
+  </div>
+<% end %>

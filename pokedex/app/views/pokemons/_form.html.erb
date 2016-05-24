@@ -1,9 +1,29 @@
-<%= form_for @pokemon do |f| %>
+<%= simple_form_for @pokemon do |f| %>
 	<div class="row">
 		<div class="form-group col-lg-5">
-			<%= f.label :name, 'Nom' %><br>
-			<%= f.text_field :name, class: 'form-control' %>
+			<%= f.input :name, label: 'Nom', class: 'form-control' %>
+		</div>
+		<div class="form-group col-lg-5">
+			<%= f.association :type, label: 'Type', class: 'form-control' %>
+		</div>
+		<div class="form-group col-lg-5">
+			<%= f.association :moves, label: 'Attaques', class: 'form-control', as: :check_boxes, item_wrapper_tag: :label, item_wrapper_class: 'checkbox-inline' %>
 		</div>
 	</div>
-	<%= f.submit 'Ajouter', class: 'btn btn-primary' %>
+	<div class="row">
+		<div class="form-group col-lg-5">
+			<%= f.input :number, label: 'Numéro', class: 'form-control' %>
+		</div>
+	</div>
+	<div class="row">
+		<div class="form-group col-lg-5">
+			<%= f.input :level, label: 'Niveau', class: 'form-control' %>
+		</div>
+	</div>
+	<div class="row">
+		<div class="form-group col-lg-5">
+			<%= f.input :health_points, label: 'PV', class: 'form-control' %>
+		</div>
+	</div>
+	<%= f.submit 'Enregistrer', class: 'btn btn-primary' %>
 <% end %>

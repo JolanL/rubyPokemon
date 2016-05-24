@@ -5,19 +5,41 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Pokedex</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
+  <% unless Rails.application.assets.find_asset("#{controller_name}.css").nil? %>
+  	<%= stylesheet_link_tag controller_name, media: 'all', 'data-turbolinks-track' => true %>
+  <% end %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <% unless Rails.application.assets.find_asset("#{controller_name}.js").nil? %>
+  	<%= javascript_include_tag controller_name, 'data-turbolinks-track' => true %>
+  <% end %>
   <%= csrf_meta_tags %>
+  <% if user_signed_in? %>
+  	Connecté en tant que <%= current_user.email %>
+  	<%= link_to "Se déconnecter", destroy_user_session_path, method: :delete %>
+  <% else %>
+  	<%= link_to "Se connecter", new_user_session_path %>
+  <% end %>
 </head>
-<body>
-<header>
-	<p>
-		<%= link_to 'Liste des Pokemons', pokemons_path, class: 'btn btn-default' %>
-	</p>
-</header>
+<body class="<%= "#{controller_name}-#{action_name}" %>">
+<div class="container">
+	<header style="margin-top:18px">
+		<p>
+			<%= link_to 'Liste des Pokemons', pokemons_path, class: 'btn btn-default' %>
+			<%= link_to 'Liste des Types', types_path, class: 'btn btn-default' %>
+			<%= link_to 'Liste des Attaques', moves_path, class: 'btn btn-default' %>
+		</p>
+		<% flash.each do |name, msg| %>
+			<div class="alert alert-<%= name %>">
+				<a class="close" data-dismiss="alert"></a>
+				<%= content_tag :div, msg, id: "flash_#{name}" %>
+			</div>
+		<% end %>	
+	</header>
+
 	<br>
-	<div class="container">
-		<%= yield %>
-	</div>
+	
+	<%= yield %>
+</div>
 </body>
 </html>

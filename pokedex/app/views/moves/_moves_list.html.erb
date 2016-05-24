@@ -1,0 +1,7 @@
+<% if moves.any? %>
+	<%= moves.map { |move| link_to move.name, move }
+	.join(', ')
+	.html_safe %>
+<% else %>
+	pas d'attaque
+<% end %>

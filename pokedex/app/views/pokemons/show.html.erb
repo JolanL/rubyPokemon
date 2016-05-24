@@ -4,9 +4,18 @@
 	Affichage d'un Pokemon 
 </h2>	
 
+<p>Numéro : <%= @pokemon.number %></p>
 <p>Nom : <%= @pokemon.name %></p>
+<p>
+	Type :
+	<%= render partial: 'types/type', locals: { type: @pokemon.type } %>
+</p>
+<p>Niveau : <%= @pokemon.level %></p>
+<p>PV : <%= @pokemon.health_points %></p>
+<p>
+	Attaque :
+	<%= render partial: 'moves/moves_list', locals: {moves: @pokemon.moves} %>
+</p>
 
 
-<%= link_to 'Liste des Pokemons', pokemons_path, class: 'btn btn-default' %>
-
-<%= link_to 'Editer', edit_pokemons_path(@pokemon), class: 'btn btn-warning' %>
+<%= link_to 'Editer', edit_pokemon_path(@pokemon), class: 'btn btn-warning' %>
